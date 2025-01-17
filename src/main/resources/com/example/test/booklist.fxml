@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test.BookListController">
+    <children>
+        <Button layoutX="728.0" layoutY="761.0" mnemonicParsing="false" onAction="#BookListRemoveWindow" text="Zamknij" />
+      <TableView fx:id="booksTable" layoutX="240.0" layoutY="14.0" onMouseClicked="#getDataRow" prefHeight="518.0" prefWidth="552.0">
+        <columns>
+          <TableColumn fx:id="colTitle" prefWidth="232.0" text="Tytuł" />
+            <TableColumn fx:id="colAuth" prefWidth="163.0" text="Autor" />
+          <TableColumn fx:id="colAmou" prefWidth="155.0" text="Ilość" />
+        </columns>
+      </TableView>
+      <Button layoutX="631.0" layoutY="542.0" mnemonicParsing="false" onAction="#LoadData" text="Test b" />
+      <Button layoutX="73.0" layoutY="555.0" mnemonicParsing="false" onAction="#AddBook" text="Dodaj Książkę" />
+      <Button layoutX="60.0" layoutY="592.0" mnemonicParsing="false" onAction="#EditBook" text="Edytuj ilość książek" />
+      <Button layoutX="73.0" layoutY="628.0" mnemonicParsing="false" onAction="#RemoveBook" prefHeight="25.0" prefWidth="90.0" text="Usuń Książkę" />
+      <Label layoutX="104.0" layoutY="230.0" prefHeight="31.0" prefWidth="49.0" text="Tytuł">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <TextField fx:id="bookTitle" layoutX="54.0" layoutY="261.0" />
+      <TextField fx:id="bookAuthor" layoutX="54.0" layoutY="324.0" />
+      <TextField fx:id="bookAmount" layoutX="54.0" layoutY="388.0" />
+      <Label layoutX="104.0" layoutY="357.0" prefHeight="31.0" prefWidth="49.0" text="Ilość">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="104.0" layoutY="293.0" prefHeight="31.0" prefWidth="49.0" text="Autor">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="BookError" alignment="CENTER" layoutX="25.0" layoutY="208.0" prefHeight="19.0" prefWidth="207.0" textFill="RED">
+         <font>
+            <Font name="Calibri Bold" size="18.0" />
+         </font>
+      </Label>
+    </children>
+</AnchorPane>

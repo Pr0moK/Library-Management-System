@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test.HelloController">
+   <children>
+      <Button layoutX="195.0" layoutY="275.0" mnemonicParsing="false" onAction="#onFinishReg" text="Zarejestruj" />
+      <Label layoutX="123.0" layoutY="185.0" text="Imie" />
+      <PasswordField fx:id="password" layoutX="156.0" layoutY="131.0" onAction="#onFinishReg" />
+      <TextField fx:id="username" layoutX="156.0" layoutY="93.0" />
+      <Label layoutX="118.0" layoutY="97.0" prefHeight="17.0" prefWidth="32.0" text="Login" />
+      <Label layoutX="118.0" layoutY="135.0" prefHeight="17.0" prefWidth="32.0" text="Hasło" />
+      <Label layoutX="96.0" layoutY="219.0" prefHeight="17.0" prefWidth="54.0" text="Nazwisko" />
+      <TextField fx:id="fname" layoutX="156.0" layoutY="181.0" onAction="#onFinishReg" />
+      <TextField fx:id="surname" layoutX="156.0" layoutY="215.0" onAction="#onFinishReg" />
+      <Button layoutX="204.0" layoutY="313.0" mnemonicParsing="false" onAction="#BackButtonClick" text="Powrót" />
+      <Label fx:id="ErrorRegister" layoutX="142.0" layoutY="240.0" prefHeight="25.0" prefWidth="179.0" textFill="RED">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="142.0" layoutY="240.0" prefHeight="25.0" prefWidth="179.0" textFill="RED">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
