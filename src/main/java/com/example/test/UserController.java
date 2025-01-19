@@ -38,4 +38,20 @@ public class UserController {
             System.err.println("Błąd podczas ładowania danych użytkowników: " + e.getMessage());
         }
     }
+
+    @FXML
+    private void getUser() throws IOException {
+        int index = usersTable.getSelectionModel().getSelectedIndex();
+
+        if (index <= -1) {
+            return;
+        }
+
+        String login = colLogin.getCellData(index);
+        String name = colName.getCellData(index);
+        String surname = colSurname.getCellData(index);
+
+        NewScene lendbookwindow = new NewScene("lendbook.fxml",800,800);
+
+    }
 }

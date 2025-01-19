@@ -122,11 +122,11 @@ public class HelloController {
     }
     @FXML
     protected void BookListButtonClick(ActionEvent event) throws IOException {
-        NewScene booklistscene = new NewScene("booklist.fxml",event,800,800);
+        NewScene booklistscene = new NewScene("booklist.fxml",800,800);
     }
     @FXML
     protected void UserListButtonClick(ActionEvent event) throws IOException {
-        NewScene userlistscene = new NewScene("membersmanagment.fxml",event,800,800);
+        NewScene userlistscene = new NewScene("membersmanagment.fxml",800,800);
 
     }
     @FXML
@@ -135,6 +135,6 @@ public class HelloController {
     }
     @FXML
     protected void LendBookWindow(ActionEvent event) throws IOException {
-        NewScene lendbookwindow = new NewScene("lendbook.fxml",event,800,800);
+        NewScene lendbookwindow = new NewScene("lendbook.fxml",800,800);
     }
 }

@@ -8,9 +8,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 
-import java.awt.print.Book;
 import java.io.IOException;
 
 public class BookListController {
@@ -63,9 +61,9 @@ public class BookListController {
         }else {
             BookError.setText("");
             try {
-                BookManagment bookManagment = new BookManagment();
+                BookManagement bookManagement = new BookManagement();
 
-                bookManagment.AddBook(bookTitle.getText(),bookAuthor.getText(), Integer.parseInt(bookAmount.getText()));
+                bookManagement.AddBook(bookTitle.getText(),bookAuthor.getText(), Integer.parseInt(bookAmount.getText()));
                 LoadData();
             } catch (NumberFormatException e) {
                 System.out.println("Amount nie jest cyfra.");
@@ -87,9 +85,9 @@ public class BookListController {
             BookError.setText("");
             try {
 
-                BookManagment bookManagment = new BookManagment();
+                BookManagement bookManagement = new BookManagement();
 
-                if (bookManagment.EditBook(bookTitle.getText(), bookAuthor.getText(), Integer.parseInt(bookAmount.getText()))) {
+                if (bookManagement.EditBook(bookTitle.getText(), bookAuthor.getText(), Integer.parseInt(bookAmount.getText()))) {
                     System.out.println("Pomyślnie edytowano ilość książek");
                     BookError.setText("");
                 } else {
@@ -124,9 +122,9 @@ public class BookListController {
             try {
 
 
-                BookManagment bookManagment = new BookManagment();
+                BookManagement bookManagement = new BookManagement();
 
-                if (bookManagment.RemoveBook(bookTitle.getText(), bookAuthor.getText())) {
+                if (bookManagement.RemoveBook(bookTitle.getText(), bookAuthor.getText())) {
                     BookError.setText("");
                     LoadData();
                 } else {

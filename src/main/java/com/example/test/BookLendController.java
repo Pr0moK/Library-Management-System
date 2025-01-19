@@ -3,15 +3,13 @@ package com.example.test;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
-import java.awt.print.Book;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class BookLendController {
 
@@ -50,6 +48,12 @@ public class BookLendController {
     private TableColumn<Users, String> colName;
     @FXML
     private TableColumn<Users, String> colSurname;
+    @FXML
+    private ChoiceBox <String> DatePicker;
+    @FXML
+    private String[] dates = {"7 dni", "14 dni", "30 dni", "60 dni"};
+
+
 
     @FXML
     public void initialize() throws IOException {
@@ -60,6 +64,10 @@ public class BookLendController {
         colLogin.setCellValueFactory(new PropertyValueFactory<>("login"));
         colName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         colSurname.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+
+        DatePicker.getItems().addAll(dates);
+        DatePicker.setValue(dates[0]);
+        System.out.println(DatePicker.valueProperty());
 
         loadBookData();
         loadUserData();
@@ -96,8 +104,17 @@ public class BookLendController {
 
     @FXML
     void IssueBookButton(ActionEvent event) throws IOException {
-        BookManagment bookManagment = new BookManagment();
-        bookManagment.LendBook(bookTitle.getText(),bookAuthor.getText(),userLogin.getText());
+        BookManagement bookManagement = new BookManagement();
+
+        String date = DatePicker.getValue();
+        int dateindex = Arrays.asList(dates).indexOf(date);
+
+        if(bookManagement.LendBook(bookTitle.getText(),bookAuthor.getText(),userLogin.getText(), dateindex)){
+            System.out.println("Book Lend");
+        } else {
+            System.out.println("Book Not Lend");
+        }
+        loadBookData();
     }
 
     @FXML

@@ -1,11 +1,12 @@
 package com.example.test;
+
 import java.io.IOException;
 import java.sql.*;
 
-public class BookManagment extends BaseConnect {
+public class BookManagement extends BaseConnect {
 
 
-    public BookManagment() throws IOException {
+    public BookManagement() throws IOException {
         super();
     }
 
@@ -104,22 +105,61 @@ public class BookManagment extends BaseConnect {
             throw new RuntimeException(e);
         }
     }
-    public void LendBook(String title, String author, String user) {
-        String IssueQuery = "INSERT INTO IssuedBooks (title, author, username) VALUES (?, ?, ?)";
-        try(Connection connection = getConnection(); PreparedStatement prep = connection.prepareStatement(IssueQuery) ){
+    public boolean LendBook(String title, String author, String user, int date) {
+        String IssueQuery = "INSERT INTO IssuedBooks (title, author, username, dateissued, datereturn) VALUES (?, ?, ?, ?, ?)";
+        String AvalibleAmount = "SELECT amount FROM books WHERE title = ? AND author = ?";
+        final int days = getLoanDuration(date);
+
+        try(Connection connection = getConnection(); PreparedStatement prep  = connection.prepareStatement(AvalibleAmount)){
             prep.setString(1, title.toLowerCase());
             prep.setString(2, author.toLowerCase());
-            prep.setString(3, user.toLowerCase());
-            int RowsAffected = prep.executeUpdate();
-            if(RowsAffected > 0) {
-                System.out.println("Successfully lended book");
-            } else {
-                System.out.println("Failed to lended book");
-            }
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            ResultSet rs = prep.executeQuery();
+            if(rs.next()) {
+                System.out.println(rs.getInt("amount"));
+
+                if(rs.getInt("amount") > 0) {
+
+                    int newamount = rs.getInt("amount") - 1;
+                    EditBook(title, author, newamount);
+
+                    try(PreparedStatement preptwo = connection.prepareStatement(IssueQuery) ){
+
+                        preptwo.setString(1, title.toLowerCase());
+                        preptwo.setString(2, author.toLowerCase());
+                        preptwo.setString(3, user.toLowerCase());
+                        preptwo.setDate(4, Date.valueOf(java.time.LocalDate.now()));
+                        preptwo.setDate(5, Date.valueOf(java.time.LocalDate.now().plusDays(days)));
+
+                        int RowsAffected = preptwo.executeUpdate();
+                        if(RowsAffected > 0) {
+                            System.out.println("Successfully lended book");
+                            return true;
+                        } else {
+                            System.out.println("Failed to lended book");
+                            return false;
+                        }
+
+                    } catch (SQLException e) {
+                        throw new RuntimeException("Error while lending book", e);
+                    }
+                }else {
+                    return false;
+                }
+            }
+        } catch ( SQLException e) {
+            throw new RuntimeException("Error with Database: ",e);
         }
+        return false;
+    }
+
+    private int getLoanDuration(int date) {
+        return switch (date) {
+            case 1 -> 14;
+            case 2 -> 30;
+            case 3 -> 60;
+            default -> 7;
+        };
     }
 
 }

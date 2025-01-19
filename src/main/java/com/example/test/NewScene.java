@@ -14,12 +14,12 @@ public class NewScene {
     private static final int d_width = 800;
     private static final int d_height = 600;
 
-    public NewScene(String fxml, ActionEvent event) throws IOException {
+    public NewScene(String fxml) throws IOException {
         this.width = d_width;
         this.height = d_height;
     }
 
-    public NewScene(String fxml, ActionEvent event, int width, int height) throws IOException {
+    public NewScene(String fxml, int width, int height) throws IOException {
         this.width = width;
         this.height = height;
 
