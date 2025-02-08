@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test.Controller.UserpreviewController">
+   <children>
+      <TableView fx:id="UserPreviewTable" layoutX="65.0" layoutY="317.0" prefHeight="200.0" prefWidth="682.0">
+        <columns>
+            <TableColumn fx:id="colID" prefWidth="75.0" text="Id" />
+          <TableColumn fx:id="colTitle" prefWidth="124.0" text="Tytuł" />
+          <TableColumn fx:id="colAuthor" minWidth="9.0" prefWidth="118.0" text="Autor" />
+            <TableColumn fx:id="colDateOfLend" prefWidth="132.0" text="Data wypożyczenia" />
+            <TableColumn fx:id="colDateOfReturn" prefWidth="132.0" text="Data zwrotu" />
+            <TableColumn fx:id="colFee" prefWidth="85.0" text="Opłata" />
+        </columns>
+      </TableView>
+      <Label fx:id="firstname" layoutX="65.0" layoutY="98.0" prefHeight="41.0" prefWidth="126.0" text="Imie">
+         <font>
+            <Font name="Calibri Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label fx:id="surname" layoutX="216.0" layoutY="98.0" prefHeight="41.0" prefWidth="197.0" text="Nazwisko">
+         <font>
+            <Font name="Calibri Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label fx:id="username" layoutX="459.0" layoutY="98.0" prefHeight="41.0" prefWidth="148.0" text="Login">
+         <font>
+            <Font name="Calibri Bold" size="36.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#145214" height="56.0" stroke="BLACK" strokeType="INSIDE" width="800.0" />
+      <Label layoutX="53.0" layoutY="7.0" text="System biblioteczny" textFill="#f2f2f2">
+         <font>
+            <Font name="Calibri Bold" size="36.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="50.0" fitWidth="48.0" layoutX="1.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/lib.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="51.0" layoutY="57.0" text="&gt; Podgląd użytkownika" textFill="#145214">
+         <font>
+            <Font name="Calibri Bold" size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="65.0" layoutY="139.0" text="Imię">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="216.0" layoutY="139.0" text="Nazwisko">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="459.0" layoutY="139.0" text="Login">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="65.0" layoutY="270.0" text="Wypożyczone książki:">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
