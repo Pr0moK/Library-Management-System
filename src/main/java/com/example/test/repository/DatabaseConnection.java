@@ -1,4 +1,4 @@
-package com.example.test;
+package com.example.test.repository;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,13 +7,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class BaseConnect {
+public class DatabaseConnection {
 
     private String user;
     private String password;
     private String url;
 
-    public BaseConnect() throws IOException {
+    public DatabaseConnection() throws IOException {
         loadDatabaseConfig();
     }
 

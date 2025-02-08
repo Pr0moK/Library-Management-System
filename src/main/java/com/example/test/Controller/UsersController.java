@@ -1,16 +1,19 @@
-package com.example.test;
+package com.example.test.Controller;
 
+import com.example.test.NewSceneController;
+import com.example.test.model.ChoosenUser;
+import com.example.test.model.Users;
+import com.example.test.service.DataLoaderService;
+import com.example.test.service.IssuedBookFeeService;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 
-public class UserController {
+public class UsersController {
 
     @FXML
     private TableView<Users> usersTable;
@@ -23,14 +26,18 @@ public class UserController {
 
     @FXML
     public void initialize() throws IOException {
+
         colLogin.setCellValueFactory(new PropertyValueFactory<>("login"));
         colName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         colSurname.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         loadUserData();
+
+        IssuedBookFeeService fee = new IssuedBookFeeService();
+        fee.CheckFee();
     }
 
     private void loadUserData() throws IOException {
-        LoadDataToList loader = new LoadDataToList();
+        DataLoaderService loader = new DataLoaderService();
         try {
             ObservableList<Users> usersList = loader.loadUsersData();
             usersTable.setItems(usersList);
@@ -47,11 +54,13 @@ public class UserController {
             return;
         }
 
-        String login = colLogin.getCellData(index);
-        String name = colName.getCellData(index);
-        String surname = colSurname.getCellData(index);
+        ChoosenUser data = ChoosenUser.getInstance();
+        data.setLogin(colLogin.getCellData(index));
+        data.setFirstName(colName.getCellData(index));
+        data.setLastName(colSurname.getCellData(index));
 
-        NewScene lendbookwindow = new NewScene("lendbook.fxml",800,800);
+
+        NewSceneController lendbookwindow = new NewSceneController("UserdetailsView.fxml",800,800);
 
     }
 }

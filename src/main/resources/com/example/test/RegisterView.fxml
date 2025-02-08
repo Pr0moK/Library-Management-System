@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test.Controller.RegisterController">
    <children>
       <Button layoutX="195.0" layoutY="275.0" mnemonicParsing="false" onAction="#onFinishReg" text="Zarejestruj" />
       <Label layoutX="123.0" layoutY="185.0" text="Imie" />
@@ -21,7 +21,7 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="142.0" layoutY="240.0" prefHeight="25.0" prefWidth="179.0" textFill="RED">
+      <Label alignment="CENTER" layoutX="94.0" layoutY="240.0" prefHeight="25.0" prefWidth="227.0" textFill="RED">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>

@@ -1,5 +1,9 @@
-package com.example.test;
+package com.example.test.Controller;
 
+import com.example.test.service.BookService;
+import com.example.test.model.Book;
+import com.example.test.service.DataLoaderService;
+import com.example.test.utils.OnStatisticListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +16,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.io.IOException;
 
 public class BookListController {
+
+    private OnStatisticListener StatisticListener;
+
+    public void setOnStatisticListner(OnStatisticListener listener) {
+        this.StatisticListener = listener;
+    }
 
     @FXML
     private Label BookError;
@@ -26,34 +36,35 @@ public class BookListController {
     private TextField bookTitle;
 
     @FXML
-    private TableView<Books> booksTable;
+    private TableView<Book> booksTable;
 
     @FXML
-    private TableColumn<Books, Integer> colAmou;
+    private TableColumn<Book, Integer> colAmou;
 
     @FXML
-    private TableColumn<Books, String> colAuth;
+    private TableColumn<Book, String> colAuth;
 
     @FXML
-    private TableColumn<Books, String> colTitle;
+    private TableColumn<Book, String> colTitle;
 
     @FXML
     public void initialize() throws IOException {
         colTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
         colAuth.setCellValueFactory(new PropertyValueFactory<>("author"));
         colAmou.setCellValueFactory(new PropertyValueFactory<>("amount"));
-        loadBookData();
+        LoadbookData();
     }
 
-    private void loadBookData() throws IOException {
-        LoadDataToList loader = new LoadDataToList();
+    public void LoadbookData() throws IOException {
+        DataLoaderService loader = new DataLoaderService();
         try {
-            ObservableList<Books> booksList = loader.loadBooksData();
-            booksTable.setItems(booksList);
+            ObservableList<Book> bookList = loader.loadBooksData();
+            booksTable.setItems(bookList);
         } catch (IOException e) {
             System.err.println("Błąd podczas ładowania danych użytkowników: " + e.getMessage());
         }
     }
+
     @FXML
     protected void AddBook() throws IOException {
         if(bookAuthor.getText().isEmpty() || bookTitle.getText().isEmpty() || bookAmount.getText().isEmpty()){
@@ -61,20 +72,19 @@ public class BookListController {
         }else {
             BookError.setText("");
             try {
-                BookManagement bookManagement = new BookManagement();
+                BookService bookService = new BookService();
 
-                bookManagement.AddBook(bookTitle.getText(),bookAuthor.getText(), Integer.parseInt(bookAmount.getText()));
-                LoadData();
+                bookService.AddBook(bookTitle.getText(),bookAuthor.getText(), Integer.parseInt(bookAmount.getText()));
+                BookError.setText("Pomyślnie dodano książkę.");
+                LoadbookData();
+                if(StatisticListener != null){
+                    StatisticListener.onStatisticReturn();
+                }
             } catch (NumberFormatException e) {
                 System.out.println("Amount nie jest cyfra.");
-                BookError.setText("Ilość musi być cyfrą!");
+                BookError.setText("Liczba musi być cyfrą!");
             }
         }
-    }
-
-    @FXML
-    protected void BookListRemoveWindow(ActionEvent event) throws IOException {
-        DeleteScene booklistdelete = new DeleteScene(event);
     }
 
     @FXML
@@ -85,32 +95,25 @@ public class BookListController {
             BookError.setText("");
             try {
 
-                BookManagement bookManagement = new BookManagement();
+                BookService bookService = new BookService();
 
-                if (bookManagement.EditBook(bookTitle.getText(), bookAuthor.getText(), Integer.parseInt(bookAmount.getText()))) {
-                    System.out.println("Pomyślnie edytowano ilość książek");
-                    BookError.setText("");
+                if (bookService.EditBookAmount(bookTitle.getText(), bookAuthor.getText(), Integer.parseInt(bookAmount.getText()))) {
+                    LoadbookData();
+                    System.out.println("Pomyślnie edytowano liczbę książek.");
+                    BookError.setText("Pomyślnie edytowano liczbę książek.");
+                    if(StatisticListener != null){
+                        StatisticListener.onStatisticReturn();
+                    }
                 } else {
                     System.out.println("Nie istnieje taka książka.");
                     BookError.setText("NIe znaleziono książki");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Amount nie jest cyfra.");
-                BookError.setText("Ilość nie jest cyfrą!");
+                BookError.setText("Liczba nie jest cyfrą!");
             }
 
         }
-    }
-
-    @FXML
-    protected void LoadData() throws IOException {
-        colTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
-        colAuth.setCellValueFactory(new PropertyValueFactory<>("author"));
-        colAmou.setCellValueFactory(new PropertyValueFactory<>("amount"));
-
-        LoadDataToList loader = new LoadDataToList();
-        ObservableList<Books> booksList = loader.loadBooksData();
-        booksTable.setItems(booksList);
     }
 
     @FXML
@@ -122,24 +125,27 @@ public class BookListController {
             try {
 
 
-                BookManagement bookManagement = new BookManagement();
+                BookService bookService = new BookService();
 
-                if (bookManagement.RemoveBook(bookTitle.getText(), bookAuthor.getText())) {
-                    BookError.setText("");
-                    LoadData();
+                if (bookService.RemoveBook(bookTitle.getText(), bookAuthor.getText())) {
+                    BookError.setText("Pomyślnie usunięto książkę.");
+                    LoadbookData();
+                    if(StatisticListener != null){
+                        StatisticListener.onStatisticReturn();
+                    }
                 } else {
                     BookError.setText("Nie znaleziono książki!");
                 }
 
             } catch (NumberFormatException e) {
                 System.out.println("Amount nie jest cyfra.");
-                BookError.setText("Ilość nie jest cyfrą!");
+                BookError.setText("Liczba nie jest cyfrą!");
             }
         }
     }
 
     @FXML
-    protected void getDataRow() {
+    protected void GetdataRow() {
         int index = booksTable.getSelectionModel().getSelectedIndex();
 
         if(index <= -1){

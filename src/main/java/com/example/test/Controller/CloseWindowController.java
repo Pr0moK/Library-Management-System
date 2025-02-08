@@ -1,12 +1,12 @@
-package com.example.test;
+package com.example.test.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.stage.Stage;
 
-public class DeleteScene{
+public class CloseWindowController {
 
-    public DeleteScene(ActionEvent event) {
+    public CloseWindowController(ActionEvent event) {
         Stage currentStage = (Stage)((Node) event.getSource()).getScene().getWindow();
         currentStage.close();
     }

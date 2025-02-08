@@ -1,12 +1,15 @@
-package com.example.test;
+package com.example.test.service;
+
+import com.example.test.model.ChoosenUser;
+import com.example.test.repository.DatabaseConnection;
 
 import java.io.IOException;
 import java.sql.*;
 
-public class DatabaseAction extends BaseConnect{
+public class DatabaseService extends DatabaseConnection {
 
 
-    public DatabaseAction() throws IOException {
+    public DatabaseService() throws IOException {
         super();
     }
 
@@ -57,5 +60,36 @@ public class DatabaseAction extends BaseConnect{
             System.err.println("Błąd podczas sprawdzania użytkownika: " + e.getMessage());
             return false;
         }
+    }
+
+    public void GetUser(String login) {
+        String Query = "SELECT first_name, last_name FROM users WHERE username = ?";
+
+        try(Connection connection = getConnection(); PreparedStatement prep = connection.prepareStatement(Query)) {
+            prep.setString(1, login);
+            ResultSet rs = prep.executeQuery();
+            while (rs.next()) {
+                ChoosenUser user = ChoosenUser.getInstance();
+                user.setFirstName(rs.getString("first_name"));
+                user.setLastName(rs.getString("last_name"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public int CountUsers() {
+        String Query = "SELECT COUNT(*) FROM users";
+
+        try(Connection connection = getConnection(); PreparedStatement prep = connection.prepareStatement(Query)){
+            ResultSet rs = prep.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
     }
 }

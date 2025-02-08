@@ -7,20 +7,19 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.EventObject;
 
-public class SwitchScene{
+public class SwitchSceneController {
     private int width;
     private int height;
     private static final int d_width = 800;
     private static final int d_height = 600;
 
-    public SwitchScene(String fxml, ActionEvent event) throws IOException {
+    public SwitchSceneController(String fxml, ActionEvent event) throws IOException {
         this.width = d_width;
         this.height = d_height;
     }
 
-    public SwitchScene(String fxml, ActionEvent event, int width, int height) throws IOException {
+    public SwitchSceneController(String fxml, ActionEvent event, int width, int height) throws IOException {
         this.width = width;
         this.height = height;
 
@@ -33,5 +32,6 @@ public class SwitchScene{
 
         Stage currentStage = (Stage)((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(scene);
+        currentStage.setResizable(false);
     }
 }

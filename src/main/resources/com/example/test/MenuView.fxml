@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="800.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test.Controller.MenuController">
+   <children>
+      <VBox layoutY="50.0" prefHeight="489.0" prefWidth="202.0" style="-fx-background-color: #145214;">
+         <children>
+            <Button alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#LendBookWindow" prefHeight="40.0" prefWidth="220.0" text="Wypożyczanie ksiązek">
+               <graphic>
+                  <ImageView fitHeight="29.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/issuebook.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#ReturnbookWindow" prefHeight="40.0" prefWidth="220.0" text="Zwrot książek">
+               <graphic>
+                  <ImageView fitHeight="29.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" translateX="-22.0">
+                     <image>
+                        <Image url="@../img/returnbook.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#BookListButtonClick" prefHeight="40.0" prefWidth="220.0" text="Rejestr książek">
+               <graphic>
+                  <ImageView fitHeight="29.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" translateX="-16.0">
+                     <image>
+                        <Image url="@../img/books.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#UserListButtonClick" prefHeight="40.0" prefWidth="220.0" text="Lista użytkowników">
+               <graphic>
+                  <ImageView fitHeight="29.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" translateX="-5.0">
+                     <image>
+                        <Image url="@../img/users.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </VBox>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="100.0" layoutX="430.0" layoutY="123.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="150.0">
+         <fill>
+            <RadialGradient centerX="0.5165745856353591" centerY="0.54739336492891" radius="0.5">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.9176470637321472" green="0.9803921580314636" blue="0.9176470637321472" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </fill></Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="100.0" layoutX="619.0" layoutY="123.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="150.0">
+         <fill>
+            <RadialGradient centerX="0.5165745856353591" centerY="0.54739336492891" radius="0.5">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.9176470637321472" green="0.9803921580314636" blue="0.9176470637321472" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="100.0" layoutX="231.0" layoutY="123.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="150.0">
+         <fill>
+            <RadialGradient centerX="0.5165745856353591" centerY="0.54739336492891" radius="0.5">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.9176470637321472" green="0.9803921580314636" blue="0.9176470637321472" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Rectangle>
+      <Label fx:id="TotalBooks" alignment="CENTER" layoutX="446.0" layoutY="138.0" prefHeight="70.0" prefWidth="118.0" text="0" textFill="#0f3e0f">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+      <Label fx:id="TotalIssuedBooks" alignment="CENTER" layoutX="247.0" layoutY="138.0" prefHeight="70.0" prefWidth="118.0" text="0" textFill="#0f3e0f">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+      <Label fx:id="TotalUsers" alignment="CENTER" layoutX="635.0" layoutY="138.0" prefHeight="70.0" prefWidth="118.0" text="0" textFill="#0f3e0f">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+      <Label layoutX="438.0" layoutY="229.0" text="Liczba książek w rejestrze">
+         <font>
+            <Font name="Calibri" size="13.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#145214" height="50.0" layoutX="-3.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="808.0" />
+      <Label layoutX="53.0" layoutY="5.0" text="System biblioteczny" textFill="#f2f2f2">
+         <font>
+            <Font name="Calibri Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="219.0" layoutY="228.0" text="Liczba książek wypożyczonych">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="634.0" layoutY="227.0" text="Liczba użytkowników">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="50.0" fitWidth="48.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/lib.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

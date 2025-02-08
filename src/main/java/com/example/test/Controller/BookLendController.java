@@ -1,5 +1,10 @@
-package com.example.test;
+package com.example.test.Controller;
 
+import com.example.test.service.BookService;
+import com.example.test.model.Book;
+import com.example.test.service.DataLoaderService;
+import com.example.test.model.Users;
+import com.example.test.utils.OnStatisticListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,16 +34,16 @@ public class BookLendController {
     private TextField bookTitle;
 
     @FXML
-    private TableView<Books> booksTable;
+    private TableView<Book> booksTable;
 
     @FXML
-    private TableColumn<Books, Integer> colAmou;
+    private TableColumn<Book, Integer> colAmou;
 
     @FXML
-    private TableColumn<Books, String> colAuth;
+    private TableColumn<Book, String> colAuth;
 
     @FXML
-    private TableColumn<Books, String> colTitle;
+    private TableColumn<Book, String> colTitle;
 
     @FXML
     private TableView<Users> usersTable;
@@ -52,8 +57,15 @@ public class BookLendController {
     private ChoiceBox <String> DatePicker;
     @FXML
     private String[] dates = {"7 dni", "14 dni", "30 dni", "60 dni"};
+    @FXML
+    private Label LendMessage;
 
 
+    private OnStatisticListener StatisticListener;
+
+    public void setOnStatisticListner(OnStatisticListener listener) {
+        this.StatisticListener = listener;
+    }
 
     @FXML
     public void initialize() throws IOException {
@@ -67,14 +79,13 @@ public class BookLendController {
 
         DatePicker.getItems().addAll(dates);
         DatePicker.setValue(dates[0]);
-        System.out.println(DatePicker.valueProperty());
 
         loadBookData();
         loadUserData();
     }
 
     private void loadUserData() throws IOException {
-        LoadDataToList loader = new LoadDataToList();
+        DataLoaderService loader = new DataLoaderService();
         try {
             ObservableList<Users> usersList = loader.loadUsersData();
             usersTable.setItems(usersList);
@@ -83,35 +94,30 @@ public class BookLendController {
         }
     }
     private void loadBookData() throws IOException {
-        LoadDataToList loader = new LoadDataToList();
+        DataLoaderService loader = new DataLoaderService();
         try {
-            ObservableList<Books> booksList = loader.loadBooksData();
-            booksTable.setItems(booksList);
+            ObservableList<Book> bookList = loader.loadBooksData();
+            booksTable.setItems(bookList);
         } catch (IOException e) {
             System.err.println("Błąd podczas ładowania danych użytkowników: " + e.getMessage());
         }
     }
 
     @FXML
-    void AddBook(ActionEvent event) {
-
-    }
-
-    @FXML
-    void BookListRemoveWindow(ActionEvent event) {
-
-    }
-
-    @FXML
     void IssueBookButton(ActionEvent event) throws IOException {
-        BookManagement bookManagement = new BookManagement();
+        BookService bookService = new BookService();
 
         String date = DatePicker.getValue();
         int dateindex = Arrays.asList(dates).indexOf(date);
 
-        if(bookManagement.LendBook(bookTitle.getText(),bookAuthor.getText(),userLogin.getText(), dateindex)){
+        if(bookService.LendBook(bookTitle.getText(),bookAuthor.getText(),userLogin.getText(), dateindex)){
+            LendMessage.setText("Pomyślnie wypożyczono książkę.");
             System.out.println("Book Lend");
+            if(StatisticListener != null){
+                StatisticListener.onStatisticReturn();
+            }
         } else {
+            LendMessage.setText("Nie wypożyczono książki.");
             System.out.println("Book Not Lend");
         }
         loadBookData();

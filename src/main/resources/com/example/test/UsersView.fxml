@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test.Controller.UsersController">
+    <children>
+      <TableView fx:id="usersTable" layoutX="124.0" layoutY="141.0" onMouseClicked="#getUser" prefHeight="518.0" prefWidth="552.0">
+        <columns>
+          <TableColumn fx:id="colLogin" prefWidth="161.0" text="Login" />
+            <TableColumn fx:id="colName" prefWidth="175.0" text="Imię" />
+          <TableColumn fx:id="colSurname" prefWidth="214.0" text="Nazwisko" />
+        </columns>
+      </TableView>
+      <Label layoutX="63.0" layoutY="99.0" text="Wybierz z listy, aby podejrzeć użytkownika">
+         <font>
+            <Font name="Calibri Italic" size="14.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#145214" height="56.0" stroke="BLACK" strokeType="INSIDE" width="800.0" />
+      <Label layoutX="53.0" layoutY="7.0" text="System biblioteczny" textFill="#f2f2f2">
+         <font>
+            <Font name="Calibri Bold" size="36.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="50.0" fitWidth="48.0" layoutX="1.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/lib.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="51.0" layoutY="57.0" text="&gt; Lista użytkowników" textFill="#145214">
+         <font>
+            <Font name="Calibri Bold" size="26.0" />
+         </font>
+      </Label>
+    </children>
+</AnchorPane>

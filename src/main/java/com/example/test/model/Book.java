@@ -1,13 +1,13 @@
-package com.example.test;
+package com.example.test.model;
 
-public class Books {
+public class Book {
 
     private String Title;
     private String Author;
     private int Amount;
 
 
-    public Books(String title, String author, int amount) {
+    public Book(String title, String author, int amount) {
         this.Title = title;
         this.Author = author;
         this.Amount = amount;
